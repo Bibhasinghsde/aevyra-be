@@ -29,6 +29,7 @@ htmlcov/
 build/
 dist/
 *.egg-info/
+staticfiles/
 
 # Logs
 *.log
