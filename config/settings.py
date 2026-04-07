@@ -9,7 +9,18 @@ load_dotenv(BASE_DIR / ".env")
 SECRET_KEY = os.getenv("DJANGO_SECRET_KEY", "django-insecure-change-me")
 DEBUG = os.getenv("DJANGO_DEBUG", "True").lower() == "true"
 ALLOWED_HOSTS = [host.strip() for host in os.getenv("DJANGO_ALLOWED_HOSTS", "*").split(",") if host.strip()]
-CORS_ALLOWED_ORIGINS = [origin.strip() for origin in os.getenv("CORS_ALLOWED_ORIGINS", "http://localhost:3000,http://127.0.0.1:3000").split(",") if origin.strip()]
+
+_default_cors_origins = {
+    "http://localhost:3000",
+    "http://127.0.0.1:3000",
+    "https://aevyra-ui.vercel.app",
+}
+_configured_cors_origins = {
+    origin.strip().rstrip("/")
+    for origin in os.getenv("CORS_ALLOWED_ORIGINS", "").split(",")
+    if origin.strip()
+}
+CORS_ALLOWED_ORIGINS = sorted(_default_cors_origins | _configured_cors_origins)
 
 INSTALLED_APPS = [
     "django.contrib.admin",
