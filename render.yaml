@@ -3,7 +3,7 @@ services:
     name: aevyra-be
     env: python
     region: oregon
-    buildCommand: "./build.sh"
+    buildCommand: "bash build.sh"
     startCommand: "gunicorn config.wsgi:application"
     envVars:
       - key: DJANGO_SECRET_KEY
