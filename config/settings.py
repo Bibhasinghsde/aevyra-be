@@ -14,6 +14,7 @@ _default_cors_origins = {
     "http://localhost:3000",
     "http://127.0.0.1:3000",
     "https://aevyra-ui.vercel.app",
+    "https://aevyra-1n3motig9-bibhasinghsdes-projects.vercel.app",
 }
 _configured_cors_origins = {
     origin.strip().rstrip("/")
@@ -21,6 +22,11 @@ _configured_cors_origins = {
     if origin.strip()
 }
 CORS_ALLOWED_ORIGINS = sorted(_default_cors_origins | _configured_cors_origins)
+
+# Allow all Vercel preview URLs dynamically
+CORS_ALLOWED_ORIGIN_REGEXES = [
+    r"^https://.*\.vercel\.app$",
+]
 
 INSTALLED_APPS = [
     "django.contrib.admin",
