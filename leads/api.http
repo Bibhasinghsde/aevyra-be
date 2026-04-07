@@ -1,0 +1,45 @@
+### Create lead
+POST http://localhost:8000/api/leads/
+Content-Type: application/json
+
+{
+  "full_name": "John Doe",
+  "email": "john@example.com",
+  "phone": "+1 234 567 890",
+  "pain_area": "Stress Relief",
+  "pain_severity": "Moderate",
+  "pain_duration": "3 Months",
+  "treatments": ["Yoga", "Meditation"],
+  "country": "Thailand",
+  "travel_date": "2026-04-20",
+  "urgency": "Flexible",
+  "stay_length": "1 Week",
+  "budget": "$2,000 - $4,000"
+}
+
+### Get auth token
+POST http://localhost:8000/api/auth/token/
+Content-Type: application/json
+
+{
+  "username": "admin",
+  "password": "your-password"
+}
+
+### List leads
+GET http://localhost:8000/api/leads/?status=new&ordering=-created_at
+Authorization: Token your-token
+
+### Get lead detail
+GET http://localhost:8000/api/leads/{{lead_id}}/
+Authorization: Token your-token
+
+### Patch lead
+PATCH http://localhost:8000/api/leads/{{lead_id}}/
+Authorization: Token your-token
+Content-Type: application/json
+
+{
+  "status": "contacted",
+  "notes": "Reached out on WhatsApp."
+}
